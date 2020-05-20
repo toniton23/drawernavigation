@@ -15,6 +15,11 @@ import { MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import Poto from "../img/potogw.jpg";
 
 export function DrawerContent(props) {
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+
+  const toggleTheme = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
   return (
     <View style={{ flex: 1 }}>
       <DrawerContentScrollView {...props}>
@@ -47,59 +52,85 @@ export function DrawerContent(props) {
                 </View>
               </View>
             </View>
-            <View style={{ marginLeft: -15 }}>
-              <DrawerItem
-                icon={(color, size) => (
-                  <MaterialCommunityIcons
-                    name="home-outline"
-                    color={color}
-                    size={25}
-                  />
-                )}
-                label="Home"
-                onPress={() => {}}
-              />
-            </View>
-            <View style={styles.DrawerItem}>
-              <DrawerItem
-                icon={(color, size) => (
-                  <Feather name="user" color={color} size={25} />
-                )}
-                label="Profile"
-                onPress={() => {}}
-              />
-            </View>
-            <View style={styles.DrawerItem}>
-              <DrawerItem
-                icon={(color, size) => (
-                  <MaterialCommunityIcons
-                    name="bookmark-outline"
-                    color={color}
-                    size={25}
-                  />
-                )}
-                label="Bookmarks"
-                onPress={() => {}}
-              />
-            </View>
-            <View style={styles.DrawerItem}>
-              <DrawerItem
-                icon={(color, size) => (
-                  <Feather name="settings" color={color} size={25} />
-                )}
-                label="Setting"
-                onPress={() => {}}
-              />
-            </View>
-            <View style={styles.DrawerItem}>
-              <DrawerItem
-                icon={(color, size) => (
-                  <Feather name="users" color={color} size={25} />
-                )}
-                label="Support"
-                onPress={() => {}}
-              />
-            </View>
+            <Drawer.Section style={styles.drawerSection}>
+              <View style={{ marginLeft: -15 }}>
+                <DrawerItem
+                  icon={(color, size) => (
+                    <MaterialCommunityIcons
+                      name="home-outline"
+                      color={color}
+                      size={25}
+                    />
+                  )}
+                  label="Home"
+                  onPress={() => {
+                    props.navigation.navigate("Home");
+                  }}
+                />
+              </View>
+              <View style={styles.DrawerItem}>
+                <DrawerItem
+                  icon={(color, size) => (
+                    <Feather name="user" color={color} size={25} />
+                  )}
+                  label="Profile"
+                  onPress={() => {
+                    props.navigation.navigate("Profile");
+                  }}
+                />
+              </View>
+              <View style={styles.DrawerItem}>
+                <DrawerItem
+                  icon={(color, size) => (
+                    <MaterialCommunityIcons
+                      name="bookmark-outline"
+                      color={color}
+                      size={25}
+                    />
+                  )}
+                  label="Bookmarks"
+                  onPress={() => {
+                    props.navigation.navigate("Bookmarks");
+                  }}
+                />
+              </View>
+              <View style={styles.DrawerItem}>
+                <DrawerItem
+                  icon={(color, size) => (
+                    <Feather name="settings" color={color} size={25} />
+                  )}
+                  label="Setting"
+                  onPress={() => {
+                    props.navigation.navigate("Setting");
+                  }}
+                />
+              </View>
+              <View style={styles.DrawerItem}>
+                <DrawerItem
+                  icon={(color, size) => (
+                    <Feather name="users" color={color} size={25} />
+                  )}
+                  label="Support"
+                  onPress={() => {
+                    props.navigation.navigate("SupportScreen");
+                  }}
+                />
+              </View>
+            </Drawer.Section>
+            <Drawer.Section title="Preference" style={{ marginLeft: -12 }}>
+              <TouchableRipple
+                onPress={() => {
+                  toggleTheme();
+                }}
+              >
+                <View style={styles.preference}>
+                  <Text>Dark Theme</Text>
+                  <View pointerEvents="none">
+                    <Switch value={isDarkTheme} />
+                  </View>
+                </View>
+              </TouchableRipple>
+            </Drawer.Section>
           </View>
         </View>
       </DrawerContentScrollView>
